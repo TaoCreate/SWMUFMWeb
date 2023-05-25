@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+@if ((bool)ViewData["isDelete"])
+{
+    <script>alert('删除成功！'); history.go(-1)</script>
+}
+else
+{
+    <script>alert('删除失败请检查输入！'); history.go(-1)</script>
+}
+

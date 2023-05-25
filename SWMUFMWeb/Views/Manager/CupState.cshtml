@@ -1,0 +1,66 @@
+﻿@model List<SWMUFMWeb.CupStates_Teamname>
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>杯赛状态管理</h1>
+<hr />
+
+<table>
+    <thead>
+        <tr>
+            <th>球队id</th>
+            <th>球队名称</th>
+            <th>分组</th>
+            <th>小组分数</th>
+            <th>是否出局</th>
+            <th>杯赛id</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.cupState.TeamId</td>
+                    <td>@item.teamname</td>
+                    <td>@item.cupState.Group</td>
+                    <td>@item.cupState.GroupScore</td>
+                    <td>@if (item.cupState.IsKnockout) {@ViewBag.isOut }else{@ViewBag.isNotOut}</td>
+                    <td>@item.cupState.CupId</td>
+                </tr>
+        }
+    </tbody>
+</table>
+<hr />
+<h2>添加杯赛参与球队信息</h2>
+<form asp-action="InsertCupState" method="post">
+    <label>球队</label>
+    @Html.DropDownList("teamId",ViewBag.teamSelectList as SelectList,"选择球队",new{@class="downList"})
+    <label>分组</label>
+    <input type="text" name="group" />
+    <label>小组分数</label>
+    <input type="text" name="groupScore" />
+    <label>是否出局</label>
+    @Html.DropDownList("boolValue",ViewBag.boolSelectList as SelectList,"选择状态",new{@class="downList"})
+    <button type="submit" name="cupId" value="@ViewBag.cupId">提交</button>
+</form>
+
+<hr />
+<h2>修改杯赛参与球队信息</h2>
+<form asp-action="UpdateCupState" method="post">
+    <label>球队</label>
+    @Html.DropDownList("teamId",ViewBag.cupTeamSelectList as SelectList,"选择球队",new{@class="downList"})
+    <label>分组</label>
+    <input type="text" name="group" />
+    <label>小组分数</label>
+    <input type="text" name="groupScore" />
+    <label>是否出局</label>
+    @Html.DropDownList("boolValue",ViewBag.boolSelectList as SelectList,"选择状态",new{@class="downList"})
+    <button type="submit" name="cupId" value="@ViewBag.cupId">提交</button>
+</form>
+<hr />
+<h2>删除杯赛参与球队信息</h2>
+<form asp-action="DeleteCupStateById" method="post">
+    <label>球队id</label>
+    <input type="text" name="teamId" />
+    <button type="submit" name="cupId" value="@ViewBag.cupId">提交</button>
+</form>

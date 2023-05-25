@@ -1,0 +1,56 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+						<h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/bisai2.jpg"></div>
+		</div>
+	</section>
+
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>@ViewBag.leagueName 赛程统计</h4>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.matchAndTeamNameList)
+							{
+								@Html.ActionLink(item.teamName1+" VS "+item.teamName2+"在"+item.match.MatchPosition+"进行比赛"+"，时间为"+item.match.MatchDate,"ReturnMatchResult",new{matchId=item.match.MatchId,isOver=item.match.IsOver,teamId1=item.match.TeamId1,teamId2=item.match.TeamId2})
+								<br>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="sb-widget" style="width:900px">
+				<h4>@ViewBag.leagueName 赛程状态</h4>
+				<h5>@ViewBag.leagueIsOver</h5>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.leagueScore_Teamnames)
+							{
+								<p>球队：@item.teamname ------- 分数：@item.leagueScore.Score</p>
+								<br>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

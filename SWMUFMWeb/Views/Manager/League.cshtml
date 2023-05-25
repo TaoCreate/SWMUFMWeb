@@ -1,0 +1,78 @@
+﻿@model List<SWMUFMWeb.Models.League>
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>联赛管理页面</h1>
+<hr />
+<h2>联赛表</h2>
+<table>
+    <thead>
+        <tr>
+            <th>联赛id</th>
+            <th>联赛名字</th>
+            <th>是否结束</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.LeagueId</td>
+                <td>@Html.ActionLink(item.LeagueName,"LeagueScore",new{leagueId=item.LeagueId})</td>
+                <td>@if (item.IsOver) { @ViewBag.isOver}else{@ViewBag.isNotOver}</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin:40px">
+    @if (ViewBag.pageIndex <= 1)
+    {
+        @Html.ActionLink("上页","League")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","League",new{pageIndex=ViewBag.pageIndex-1,pageSize=ViewBag.pageSize})
+        ;
+    }
+    共 @ViewBag.totalPage 页，第<input style="width:25px" type="text" value="@ViewBag.pageIndex" name="pageIndex" />页
+    @if (ViewBag.pageIndex >= ViewBag.totalPage)
+    {
+        @Html.ActionLink("下一页","League")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","League",new{pageIndex=ViewBag.pageIndex+1,pageSize=ViewBag.pageSize})
+        ;
+    }
+</div>
+<hr />
+<h2>添加联赛信息</h2>
+<form asp-action="InsertLeague" method="post">
+    <label>联赛id</label>
+    <input type="text" name="leagueId" />
+    <label>联赛名字</label>
+    <input type="text" name="leagueName" />
+    <label>是否结束</label>
+    @Html.DropDownList("isOver",ViewBag.boolSelectList as SelectList,"选择状态",new{@class="downList"})
+    <button type="submit">提交</button>
+</form>
+
+<hr />
+<h2>修该联赛信息</h2>
+<form asp-action="UpdateLeagueById" method="post">
+    <label>联赛id</label>
+    <input type="text" name="leagueId" />
+    <label>联赛名字</label>
+    <input type="text" name="leagueName" />
+    <label>是否结束</label>
+    @Html.DropDownList("isOver",ViewBag.boolSelectList as SelectList,"选择状态",new{@class="downList"})
+    <button type="submit">提交</button>
+</form><hr />
+<h2>删除联赛信息</h2>
+<form asp-action="DeleteLeagueById" method="post">
+    <label>联赛id</label>
+    <input type="text" name="leagueId" />
+    <button type="submit">提交</button>
+</form>

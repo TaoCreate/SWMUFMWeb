@@ -1,0 +1,55 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+						<h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/wenzhang1.jpg"></div>
+		</div>
+	</section>
+
+	<section class="elements-section spad">
+		<div class="container">
+			<div class="sb-widget">
+				<h1 class="sb-title">文章列表</h1>
+				<ul>
+					@foreach(var item in Model.articleList)
+					{	<li>
+							@Html.ActionLink( @item.ArticleTitle+"----------发布时间"+@item.ArticleDate,"ShowArticle",new{articleId=item.ArticleId})
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="elements-section spad">
+		<div class="container">
+			<div class="sb-widget" style="display:inline">
+				<h1 class="sb-title">上传文章（注意！需要登录才能上传）</h1>
+				<form>
+					<label>文章标题</label>
+					<input name="articleTitle" type="text" style="border-radius:5px" />
+					<br />
+					<label>文章内容</label>
+					<br />
+					<textarea name="articleContent" rows="20" cols="120" style="border-radius:10px"></textarea>
+					<br />
+					<button asp-action="InsertArticle">提交</button>
+				</form>
+			</div>
+		</div>
+	</section>
+
+</body>

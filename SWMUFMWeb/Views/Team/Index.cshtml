@@ -1,0 +1,53 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+						<h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/qiudui1.jpg"></div>
+		</div>
+	</section>
+
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div style="width:900px">
+				<h4>查找球队</h4>
+				<form asp-action="SearchTeam">
+					<div style="margin-top:20px">
+						<label>请输入球队名称查找:</label>
+						<input name="teamName" type="text" style="border-radius:10px"/>
+						<button>搜索</button>
+					</div>
+				</form>
+			</div>
+			<div class="sb-widget" style="width:900px">
+				<h4>球队列表</h4>
+				<div style="margin-top:20px">
+					<ul >
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.teamList)
+							{
+								@Html.ActionLink(item.TeamName,"ReturnPlayers",new{teamName=item.TeamName})
+								<br>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+

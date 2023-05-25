@@ -1,0 +1,65 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+						<h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/siyu1.jpg"></div>
+			<div class="hs-item set-bg" data-setbg="/img/xiang1.jpg"></div>
+			<div class="hs-item set-bg" data-setbg="/img/hezhao1.jpg"></div>
+		</div>
+	</section>
+
+	<section class="elements-section spad">
+		<div class="container">
+			<div class="element">
+				<h2 class="el-title">今日赛程</h2>
+				<div class="row">
+					<div>
+						<div id="accordion" class="accordion-area">
+						@foreach(var item in Model.matchAndTeamNameList)
+						{
+							<div class="panel">
+								<div class="panel-header" id="headingOne">
+										<button class="panel-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">@item.teamName1 VS @item.teamName2 @item.match.MatchDate 在 @item.match.MatchPosition 进行比赛，各位球员请准时参加</button>
+								</div>
+							</div>
+						}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="elements-section spad">
+		<div class="container">
+			<div class="sb-widget">
+				<h1 class="sb-title">最近文章列表</h1>
+				<ul>
+					@foreach(var item in Model.articleList)
+					{	<li>
+							@Html.ActionLink( @item.ArticleTitle+"----------发布时间"+@item.ArticleDate,"ShowArticle",new{articleId=item.ArticleId})
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="elements-section spad">
+	</section>
+</body>
+

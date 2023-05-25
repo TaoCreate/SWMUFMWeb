@@ -1,0 +1,61 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+
+@{
+	ViewBag.share = "分享的数据";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>@ViewData["Title"] - SWMUFMWeb</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="~/favicon.ico" rel="shortcut icon" />
+
+	<link rel="stylesheet" href="~/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="~/css/flaticon.css" />
+	<link rel="stylesheet" href="~/css/slicknav.min.css" />
+
+	@*主要css*@
+	<link rel="stylesheet" href="~/css/style.css" />
+</head>
+
+<body>
+	<header class="header-section">
+		<a href="/home/index" style="float: left;display: flex;padding: 15px 0;">
+			<img src="~/img/SWMU.jpg" alt="" style="width:60px;border-radius:50%">
+			<p style="color: white;margin-top: 16px;margin-left: 9px;">民大足球</p>
+		</a>
+		<nav class="header-nav">
+			<ul class="main-menu">
+				<li><a href="/home/index" class=@Model.isHome>首页</a></li>
+				<li><a href="/team/index" class=@Model.isTeam>球队</a></li>
+				<li><a href="/match/index" class=@Model.isMatch>赛程</a></li>
+				<li><a href="/rank/index" class=@Model.isRank>排行</a></li>
+				<li><a href="/article/index" class=@Model.isArticle>文章</a></li>
+				<li><a href="/user/index" class=@Model.isRegister>注册/登录</a></li>
+				<li style="color:white">@ViewBag.userNickName</li>
+			</ul>
+
+		</nav>
+	</header>
+
+	@RenderBody()
+
+	<footer class="footer-section">
+		<div class="container">
+			<p style="color:white;margin-top: -60px">& 2023 - SWMUFMWeb - 西南民族大学足球联赛管理系统 - 制作者：刘涛</p>
+		</div>
+	</footer>
+	<script src="~/js/jquery-3.2.1.min.js"></script>
+	<script src="~/js/bootstrap.min.js"></script>
+	<script src="~/js/jquery.slicknav.min.js"></script>
+	<script src="~/js/owl.carousel.min.js"></script>
+	<script src="~/js/jquery-ui.min.js"></script>
+	<script src="~/js/main.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

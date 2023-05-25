@@ -1,0 +1,65 @@
+﻿@model SWMUFMWeb.Views.ViewModel.Match_Team
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>为此赛程添加结果</h1>
+<hr />
+<table>
+<thead>
+    <tr>
+        <th>赛程id</th>
+        <th>比赛队伍1Id</th>
+        <th>比赛队伍1</th>
+        <th>比赛队伍2Id</th>
+        <th>比赛队伍2</th>
+        <th>比赛时间</th>
+        <th>比赛地点</th>
+        <th>所属联赛id</th>
+        <th>所属杯赛id</th>
+        <th>是否结束</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>@Model.match.MatchId</td>
+        <td>@Model.match.TeamId1</td>
+        <td>@Model.team1.TeamName</td>
+        <td>@Model.match.TeamId2</td>
+        <td>@Model.team2.TeamName</td>
+        <td>@Model.match.MatchDate</td>
+        <td>@Model.match.MatchPosition</td>
+        <td>@Model.match.LeagueId</td>
+        <td>@Model.match.CupId</td>
+        <td>
+            @if (Model.match.IsOver)
+            {
+                @ViewBag.isOver
+            }
+            else
+            {
+                @ViewBag.isNotOver
+            }
+        </td>
+    </tr>
+</tbody>
+</table>
+<hr style="margin-top:30px"/>
+<h2>添加比赛结果</h2>
+<form asp-action="IMatchResult" method="post">
+    <label style="height:40px;width: 100px;display: inline-block;text-align: center">获胜队伍id</label>
+    <input type="text" name="winTeamId" />
+    <label>球队1进球</label>
+    <input type="text" name="team1Goal" />
+    <label>球队2进球</label>
+    <input type="text" name="team2Goal" />
+    <label>球员进球</label>
+    <input type="text" name="playerIdGoal" />
+    <br />
+    <label>球员助攻</label>
+    <input type="text" name="playerIdAssists" />
+    <label>球员黄牌</label>
+    <input type="text" name="playerIdYellowcard" />
+    <label>球员红牌</label>
+    <input type="text" name="playerIdRedcard" />
+    <button type="submit" name="matchId" value="@Model.match.MatchId">提交</button>
+</form>

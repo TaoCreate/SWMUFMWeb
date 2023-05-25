@@ -1,0 +1,54 @@
+﻿@*@model List<SWMUFMWeb.Models.Team>
+@{
+    Layout = null;
+}
+
+<h1>分页显示</h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>队伍id</th>
+            <th>队伍名称</th>
+        </tr>   
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TeamId</td>
+                <td>@item.TeamName</td>
+            </tr>         
+        }
+    </tbody>
+</table>
+
+
+<div style="margin:40px">
+    @if(ViewBag.pageIndex<=1)
+    {
+        @Html.ActionLink("上一页","PagePart")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","PagePart",new{pageIndex=ViewBag.pageIndex-1,pageSize=ViewBag.pageSize})
+        ;
+    }
+    共 @ViewBag.totalPage 页，第<input style="width:25px" type="text" value="@ViewBag.pageIndex" name="pageIndex" />页
+    @if (ViewBag.pageIndex >= ViewBag.totalPage)
+    {
+        @Html.ActionLink("下一页","PagePart")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","PagePart",new{pageIndex=ViewBag.pageIndex+1,pageSize=ViewBag.pageSize})
+        ;
+    }
+</div>
+
+
+
+*@

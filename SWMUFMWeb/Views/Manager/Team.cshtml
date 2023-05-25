@@ -1,0 +1,75 @@
+﻿@model List<SWMUFMWeb.Models.Team>
+@{
+    Layout = "_ManagerLayout";
+}
+
+
+
+<h1>球队列表以及操作</h1>
+
+<hr />
+
+<h2>球队列表</h2>
+<table>
+    <thead>
+        <tr>
+            <th>球队id</th>
+            <th>球队名字</th>
+            <th>球队进球数</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TeamId</td>
+                <td>@item.TeamName</td>
+                <td>@item.Goal</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin:40px">
+    @if (ViewBag.pageIndex <= 1)
+    {
+        @Html.ActionLink("上页","Team")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","Team",new{pageIndex=ViewBag.pageIndex-1,pageSize=ViewBag.pageSize})
+        ;
+    }
+    共 @ViewBag.totalPage 页，第<input style="width:25px" type="text" value="@ViewBag.pageIndex" name="pageIndex" />页
+    @if (ViewBag.pageIndex >= ViewBag.totalPage)
+    {
+        @Html.ActionLink("下一页","Team")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","Team",new{pageIndex=ViewBag.pageIndex+1,pageSize=ViewBag.pageSize})
+        ;
+    }
+</div>
+
+<hr />
+
+<h2>添加球队</h2>
+<form asp-action="Insert" method="post">
+    <label>球队Id</label>
+    <input type="text" name="teamId"/>
+    <label>球队名称</label>
+    <input type="text" name="teamName" />
+    <button type="submit">提交</button>
+    @*@Html.ActionLink("Click me", "Insert", "Manager",new{teamId=123,teamName="你好"})*@
+</form>
+
+<hr />
+
+<h2>删除球队</h2>
+<form asp-action="Delete" method="post">
+    <lable style="width: 75px;display: inline-block;text-align:center">球队Id</lable>
+    <input name="teamId"/>
+    <button type="submit">查找并删除</button>
+</form>

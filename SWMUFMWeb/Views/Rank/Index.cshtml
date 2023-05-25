@@ -1,0 +1,101 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+						<h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/paihang1.jpg"></div>
+		</div>
+	</section>
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>球队进球排行</h4>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.teamGoalRank)
+							{
+								<p>球队： @item.TeamName ---- 进球数：@item.Goal</p>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>球员进球榜</h4>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.playerGoalRank)
+							{
+								<p>球员：@item.Name --- 球队：@item.TeamName --- 球衣号码：@item.TeamNumber --- 位置：@item.Position --- 进球数：@item.GoalCount</p>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="sb-widget" style="width:900px">
+				<h4>球员助攻榜</h4>
+				<h5></h5>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.playerAssistRank)
+							{
+								<p>球员：@item.Name --- 球队：@item.TeamName --- 球衣号码：@item.TeamNumber --- 位置：@item.Position --- 助攻数：@item.AssistCount</p>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>球员黄牌榜</h4>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.playerYellowCardRank)
+							{
+								<p>球员：@item.Name --- 球队：@item.TeamName --- 球衣号码：@item.TeamNumber --- 位置：@item.Position --- 黄牌数：@item.YellowCardCount</p>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="sb-widget" style="width:900px">
+				<h4>球员红牌榜</h4>
+				<h5></h5>
+				<div style="margin-top:20px">
+					<ul>
+						<li style="display:inline;margin-top:10px">
+							@foreach (var item in Model.playerRedCardRank)
+							{
+								<p>球员：@item.Name --- 球队：@item.TeamName --- 球衣号码：@item.TeamNumber --- 位置：@item.Position --- 红牌：@item.RedCardCount</p>
+							}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

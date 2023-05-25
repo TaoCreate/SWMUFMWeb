@@ -1,0 +1,133 @@
+﻿@model List<SWMUFMWeb.Models.Player>
+@{
+    Layout = "_ManagerLayout";
+}
+
+<h1>球员页面</h1>
+<hr />
+
+
+<h2>分页展示球员数据</h2>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>球员id</th>
+            <th>球员名字</th>
+            <th>队伍名字</th>
+            <th>球衣号码</th>
+            <th>球场位置</th>
+            <th>身高</th>
+            <th>体重</th>
+            <th>班级</th>
+            <th>籍贯</th>
+            <th>进球数</th>
+            <th>助攻数</th>
+            <th>红牌数</th>
+            <th>黄牌数</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.PlyerId</td>
+                <td>@item.Name</td>
+                <td>@item.TeamName</td>
+                <td>@item.TeamNumber</td>
+                <td>@item.Position</td>
+                <td>@item.Height</td>
+                <td>@item.Weight</td>
+                <td>@item.Class</td>
+                <td>@item.Origin</td>
+                <td>@item.GoalCount</td>
+                <td>@item.AssistCount</td>
+                <td>@item.RedCardCount</td>
+                <td>@item.YellowCardCount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="margin:40px">
+    @if (ViewBag.pageIndex <= 1)
+    {
+        @Html.ActionLink("上页","Player")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","Player",new{pageIndex=ViewBag.pageIndex-1,pageSize=ViewBag.pageSize})
+        ;
+    }
+    共 @ViewBag.totalPage 页，第<input style="width:25px" type="text" value="@ViewBag.pageIndex" name="pageIndex" />页
+    @if (ViewBag.pageIndex >= ViewBag.totalPage)
+    {
+        @Html.ActionLink("下一页","Player")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","Player",new{pageIndex=ViewBag.pageIndex+1,pageSize=ViewBag.pageSize})
+        ;
+    }
+</div>
+
+<hr/>
+<h2>添加球员</h2>
+<form asp-action="InsertPlayer" method="post">
+    <label>球员id</label>
+    <input type="text" name="playerId" />
+    <label>球员名字</label>
+    <input type="text" name="name" />
+    <label>球队名字</label>
+    @Html.DropDownList("teamName",ViewBag.teamSelectList as SelectList,"选择球队",new{@class="downList"})
+
+    <label>球衣号码</label>
+    <input type="text" name="teamNumber" />
+    <label>球场位置</label>
+    <input type="text" name="position" />
+    <br />
+    <label>身高</label>
+    <input type="text" name="height"/>
+    <label>体重</label>
+    <input type="text" name="weight"/>
+    <label>班级</label>
+    <input type="text" name="class" />
+    <label>籍贯</label>
+    <input type="text" name="origin" />
+    <button type="submit">提交</button>
+</form>
+<hr />
+
+<h2>修改球员数据</h2>
+<form asp-action="UpdatePlayerById" method="post">
+    <label>球员id</label>
+    <input type="text" name="playerId" />
+    <label>球员名字</label>
+    <input type="text" name="name" />
+    <label>球队名字</label>
+    @Html.DropDownList("teamName",ViewBag.teamSelectList as SelectList,"选择球队",new{@class="downList"})
+    <label>球衣号码</label>
+    <input type="text" name="teamNumber" />
+    <label>球场位置</label>
+    <input type="text" name="position" />
+    <br />
+    <label>身高</label>
+    <input type="text" name="height"/>
+    <label>体重</label>
+    <input type="text" name="weight"/>
+    <label>班级</label>
+    <input type="text" name="class" />
+    <label>籍贯</label>
+    <input type="text" name="origin" />
+    <button type="submit">提交</button>
+</form>
+<hr />
+<h2>删除球员</h2>
+<form asp-action="DeletePlayerByName">
+    <label>球员名字</label>
+    <input type="text" name="name" />
+    <button type="submit">提交</button>
+</form>

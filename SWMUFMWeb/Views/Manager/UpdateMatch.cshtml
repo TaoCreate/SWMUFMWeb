@@ -1,0 +1,59 @@
+﻿@model SWMUFMWeb.Models.Match
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>编辑此条</h1>
+<hr />
+<h2>赛程信息</h2>
+<table>
+<thead>
+    <tr>
+        <th>赛程id</th>
+        <th>比赛队伍1</th>
+        <th>比赛队伍2</th>
+        <th>比赛时间</th>
+        <th>比赛地点</th>
+        <th>所属联赛id</th>
+        <th>所属杯赛id</th>
+        <th>是否结束</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>@Model.MatchId</td>
+        <td>@Model.TeamId1</td>
+        <td>@Model.TeamId2</td>
+        <td>@Model.MatchDate</td>
+        <td>@Model.MatchPosition</td>
+        <td>@Model.LeagueId</td>
+        <td>@Model.CupId</td>
+        <td>@if (Model.IsOver)
+            {
+                @ViewBag.isOver
+            }
+            else
+            {
+                @ViewBag.isNotOver
+            }</td>
+    </tr>
+</tbody>
+</table>
+
+<hr style="margin-top: 30px;" />
+<h2>输入编辑内容</h2>
+<form asp-action="UpdateMatchById" method="post">
+    <label>比赛队伍1</label>
+    <input type="text" name="teamId1" />
+    <label>比赛队伍2</label>
+    <input type="text" name="teamId2" />
+    <label>比赛时间</label>
+    <input type="text" name="matchDate" />
+    <label>比赛地点</label>
+    <input type="text" name="matchPosition" />
+    <br />
+    <label style="height:40px;width: 100px;display: inline-block;text-align: center">所属联赛id</label>
+    <input type="text" name="leagueId" />
+    <label style="height:40px;width: 100px;display: inline-block;text-align: center">所属杯赛id</label>
+    <input type="text" name="cupId" />
+    <button type="submit" name="matchId" value="@Model.MatchId">提交</button>
+</form>

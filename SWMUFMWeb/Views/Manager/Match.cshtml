@@ -1,0 +1,201 @@
+﻿@model SWMUFMWeb.Views.ViewModel.Match_League_Cup
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>赛程安排</h1>
+<hr />
+<h2>赛程总览</h2>
+<table>
+    <thead>
+        <tr>
+            <th >赛程id</th>
+            <th>比赛队伍Id1</th>
+            <th>比赛队伍Id2</th>
+            <th>比赛时间</th>
+            <th >比赛地点</th>
+            <th>所属联赛id</th>
+            <th>所属杯赛id</th>
+            <th>是否结束</th>
+            <th>编辑</th>
+            <th>删除</th>
+            <th>编辑赛程结果</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MatchList)
+        {
+            <tr>
+                <td>@item.MatchId</td>
+                <td>@item.TeamId1</td>
+                <td>@item.TeamId2</td>
+                <td>@item.MatchDate</td>
+                <td>@item.MatchPosition</td>
+                <td>@item.LeagueId</td>
+                <td>@item.CupId</td>
+                <td>@if (item.IsOver)
+                    {
+                        @ViewBag.isOver
+                    }
+                    else
+                    {
+                        @ViewBag.isNotOver
+                    }</td>
+                <td>@Html.ActionLink("修改","UpdateMatch",new{matchId=item.MatchId})</td>
+                <td>@Html.ActionLink("删除","DeleteMatchById",new{matchId=item.MatchId})</td>
+                <td>@Html.ActionLink("编辑赛程结果","EditMatchResult",new{matchId=item.MatchId})</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin:40px">
+    @if (ViewBag.pageIndex <= 1)
+    {
+        @Html.ActionLink("上页","Match",new{cpageIndex=ViewBag.cpageIndex,pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","Match",new{
+    pageIndex=ViewBag.pageIndex-1,pageSize=ViewBag.pageSize,cpageIndex=ViewBag.cpageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    共 @ViewBag.totalPage 页，第<input style="width:25px" type="text" value="@ViewBag.pageIndex" name="pageIndex" />页
+    @if (ViewBag.pageIndex >= ViewBag.totalPage)
+    {
+        @Html.ActionLink("下一页","Match",new{cpageIndex=ViewBag.cpageIndex,pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","Match",new{pageIndex=ViewBag.pageIndex+1,pageSize=ViewBag.pageSize
+    ,cpageIndex=ViewBag.cpageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+</div>
+<hr />
+<h2>添加赛程信息</h2>
+<form asp-action="InsertMatch" method="post">
+    <label>比赛队伍1</label>
+    <input type="text" name="teamId1" />
+    <label>比赛队伍2</label>
+    <input type="text" name="teamId2" />
+    <label>比赛时间</label>
+    <input type="text" name="matchDate" />
+    <label>比赛地点</label>
+    <input type="text" name="matchPosition" />
+    <br />
+    <label style="height:40px;width: 100px;display: inline-block;text-align: center">所属联赛id</label>
+    <input type="text" name="leagueId" />
+    <label style="height:40px;width: 100px;display: inline-block;text-align: center">所属杯赛id</label>
+    <input type="text" name="cupId" />
+    <button type="submit">提交</button>
+</form>
+<hr />
+<h2>通过赛事查找赛程</h2>
+<div style="display:flex;align-items:center">
+<table>
+    <thead>
+        <tr>
+            <th style="width: 90px;">联赛id</th>
+            <th>联赛名字</th>
+            <th>是否结束</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeagueList)
+        {
+            <tr>
+                <td>@item.LeagueId</td>
+                <td>@Html.ActionLink(item.LeagueName,"MatchListFromLeague",new{leagueId=item.LeagueId})</td>
+                <td>@if (item.IsOver)
+                    {
+                        @ViewBag.isOver
+                    }
+                    else
+                    {
+                        @ViewBag.isNotOver
+                    }</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin:40px">
+    @if (ViewBag.lpageIndex <= 1)
+    {
+            @Html.ActionLink("上页","Match",new{cpageIndex=ViewBag.cpageIndex,pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","Match",new{lpageIndex=ViewBag.lpageIndex-1,lpageSize=ViewBag.lpageSize,
+        pageIndex=ViewBag.pageIndex,cpageIndex=ViewBag.cpageIndex})
+        ;
+    }
+    共 @ViewBag.ltotalPage 页，第<input style="width:25px" type="text" value="@ViewBag.lpageIndex" name="lpageIndex" />页
+    @if (ViewBag.lpageIndex >= ViewBag.ltotalPage)
+    {
+            @Html.ActionLink("下一页","Match",new{cpageIndex=ViewBag.cpageIndex,pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","Match",new{lpageIndex=ViewBag.lpageIndex+1,lpageSize=ViewBag.lpageSize,
+        pageIndex=ViewBag.pageIndex,cpageIndex=ViewBag.cpageIndex})
+        ;
+    }
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 90px;">杯赛id</th>
+            <th>杯赛名称</th>
+            <th>是否结束</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CupList)
+        {
+            <tr>
+                <td>@item.CupId</td>
+                <td>@Html.ActionLink(item.CupName,"MatchListFromCup",new{cupId = item.CupId})</td>
+                <td>@if (item.IsOver)
+                    {
+                        @ViewBag.isOver
+                    }
+                    else
+                    {
+                        @ViewBag.isNotOver
+                    }</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin:40px">
+    @if (ViewBag.cpageIndex <= 1)
+    {
+            @Html.ActionLink("上页","Match",new{cpageIndex=ViewBag.cpageIndex,pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","Match",new{
+        cpageIndex=ViewBag.cpageIndex-1,cpageSize=ViewBag.cpageSize,
+        pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    共 @ViewBag.ctotalPage 页，第<input style="width:25px" type="text" value="@ViewBag.cpageIndex" name="cpageIndex" />页
+    @if (ViewBag.cpageIndex >= ViewBag.ctotalPage)
+    {
+            @Html.ActionLink("下一页","Match",new{cpageIndex=ViewBag.cpageIndex,pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","Match",new{cpageIndex=ViewBag.cpageIndex+1,cpageSize=ViewBag.cpageSize,
+        pageIndex=ViewBag.pageIndex,lpageIndex=ViewBag.lpageIndex})
+        ;
+    }
+</div>
+
+</div>

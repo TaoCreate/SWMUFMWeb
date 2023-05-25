@@ -1,0 +1,40 @@
+﻿nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    background-color:darkseagreen
+}
+nav>ul {
+    position: relative;
+    display: flex;
+
+}
+nav>ul>li {
+    list-style: none;
+    width: 120px;
+    line-height: 20px;
+    text-align: center;
+}
+nav>ul>li>a{
+    color: white;
+    text-decoration: none;
+}
+
+table>tbody>tr>td
+{
+    text-align:center;
+}
+table > thead > tr > th {
+    text-align: center;
+    width: 160px;
+}
+form > label {
+    height:40px;
+    width: 75px;
+    display: inline-block;
+    text-align: center
+}
+.downList {
+    width: 170px;
+}

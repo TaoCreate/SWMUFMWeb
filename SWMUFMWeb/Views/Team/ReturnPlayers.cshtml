@@ -1,0 +1,75 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+                        <h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/qiudui1.jpg"></div>
+		</div>
+	</section>
+
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:1200px">
+				<h4>球员列表</h4>
+				<div style="margin-top:20px">
+                    <table style="margin-inline: 30px;margin-block: 25px;">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th style="width: 100px;">球员id</th>
+                                <th style="width: 100px;">球员名字</th>
+                                <th style="width: 100px;">队伍名字</th>
+                                <th style="width: 100px;">球衣号码</th>
+                                <th style="width: 100px;">球场位置</th>
+                                <th style="width: 100px;">身高</th>
+                                <th style="width: 100px;">体重</th>
+                                <th style="width: 100px;">班级</th>
+                                <th style="width: 100px;">籍贯</th>
+                                <th style="width: 60px;">进球数</th>
+                                <th style="width: 60px;">助攻数</th>
+                                <th style="width: 60px;">红牌数</th>
+                                <th style="width: 60px;">黄牌数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.playerList)
+                            {
+                                <tr style="text-align: center">
+                                    <td>@item.PlyerId</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.TeamName</td>
+                                    <td>@item.TeamNumber</td>
+                                    <td>@item.Position</td>
+                                    <td>@item.Height</td>
+                                    <td>@item.Weight</td>
+                                    <td>@item.Class</td>
+                                    <td>@item.Origin</td>
+                                    <td>@item.GoalCount</td>
+                                    <td>@item.AssistCount</td>
+                                    <td>@item.RedCardCount</td>
+                                    <td>@item.YellowCardCount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+
+
+

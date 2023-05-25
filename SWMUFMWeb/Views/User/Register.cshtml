@@ -1,0 +1,32 @@
+﻿@{
+	Layout = null;
+}
+
+<head>
+	<title>@ViewData["Title"] - SWMUFMWeb</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="~/favicon.ico" rel="shortcut icon" />
+
+	<link rel="stylesheet" href="~/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+	<link rel="stylesheet" href="~/css/flaticon.css" />
+	<link rel="stylesheet" href="~/css/slicknav.min.css" />
+
+	@*主要css*@
+	<link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+	<div class="col-lg-6">
+		<form asp-action="RegisterIn" class="hero-form">
+			<input type="text" name="userId" placeholder="你的账号">
+			<input type="text" name="userPassword" placeholder="你的密码">
+			<input type="text" name="userNickname" placeholder="你的昵称">
+			<button class="site-btn">注册账号</button>
+		</form>
+	</div>
+
+</body>
+

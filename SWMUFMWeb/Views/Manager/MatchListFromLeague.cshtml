@@ -1,0 +1,50 @@
+﻿@model List<SWMUFMWeb.Models.Match>
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>@ViewBag.leagueName</h1>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>赛程id</th>
+            <th>比赛队伍1</th>
+            <th>比赛队伍2</th>
+            <th>比赛时间</th>
+            <th>比赛地点</th>
+            <th>所属联赛id</th>
+            <th>所属杯赛id</th>
+            <th>是否结束</th>
+            <th>编辑</th>
+            <th>删除</th>
+            <th>编辑赛程结果</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MatchId</td>
+                <td>@item.TeamId1</td>
+                <td>@item.TeamId2</td>
+                <td>@item.MatchDate</td>
+                <td>@item.MatchPosition</td>
+                <td>@item.LeagueId</td>
+                <td>@item.CupId</td>
+                <td>
+                    @if (item.IsOver)
+                    {
+                        @ViewBag.isOver
+                    }
+                    else
+                    {
+                        @ViewBag.isNotOver
+                    }
+                </td>
+                <td>@Html.ActionLink("修改","UpdateMatch",new{matchId=item.MatchId})</td>
+                <td>@Html.ActionLink("删除","DeleteMatchById",new{matchId=item.MatchId})</td>
+                <td>@Html.ActionLink("编辑赛程结果","EditMatchResult",new{matchId=item.MatchId})</td>
+            </tr>
+        }
+    </tbody>
+</table>

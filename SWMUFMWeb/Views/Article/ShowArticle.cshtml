@@ -1,0 +1,43 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = null;
+}
+<body>
+			<h1>@Model.article.ArticleTitle</h1>
+			<h2>作者：@ViewBag.userNickname</h2>
+			<p>@Model.article.ArticleContent</p>
+</body>
+
+<div style="display:flex">
+	<div class="sb-widget" style="width:900px">
+		<h3>评论</h3>
+		<div style="margin-top:20px">
+			@foreach (var item in Model.commentAndNickname)
+			{
+				<p>@item.Comment.CommentContent</p>
+				<p>@item.Nickname---@item.Comment.CommentDate</p>
+				<br>
+			}
+		</div>
+	</div>
+</div>
+
+<div style="display:flex">
+	<div class="sb-widget" style="width:900px">
+		<h4>发表评论</h4>
+		<div style="margin-top:20px">
+			<form asp-action="InsertComment">
+				<label>评论</label>
+				<br />
+				<textarea name="commentContent" type="text" cols="90"></textarea>
+				<br />
+				<button name="articleId" value=@ViewBag.articleId>发表</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<form asp-action="Index">
+	<button>返回文章页面</button>
+</form>
+

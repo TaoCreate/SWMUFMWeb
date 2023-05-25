@@ -1,0 +1,58 @@
+﻿@model List<SWMUFMWeb.Models.User>
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>用户账号管理界面</h1>
+<hr />
+<h2>用户列表</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>用户账号</th>
+            <th>用户密码</th>
+            <th>用户昵称</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.UserPassword</td>
+                <td>@item.UserNickname</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="margin:40px">
+    @if (ViewBag.pageIndex <= 1)
+    {
+        @Html.ActionLink("上页","User")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("上一页","User",new{pageIndex=ViewBag.pageIndex-1,pageSize=ViewBag.pageSize})
+        ;
+    }
+    共 @ViewBag.totalPage 页，第<input style="width:25px" type="text" value="@ViewBag.pageIndex" name="pageIndex" />页
+    @if (ViewBag.pageIndex >= ViewBag.totalPage)
+    {
+        @Html.ActionLink("下一页","User")
+        ;
+    }
+    else
+    {
+        @Html.ActionLink("下一页","User",new{pageIndex=ViewBag.pageIndex+1,pageSize=ViewBag.pageSize})
+        ;
+    }
+</div>
+<hr />
+<h2>删除账号</h2>
+<form asp-action="DeleteUser">
+    <label>账号Id</label>
+    <input type="text" name="userId"/>
+    <button type="submit">删除</button>
+</form>

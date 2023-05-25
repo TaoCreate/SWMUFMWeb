@@ -1,0 +1,24 @@
+﻿<head>
+    <link rel="stylesheet" href="~/css/MTIndex.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a>@Html.ActionLink("输入规范","Index","Manager")</a></li>
+                <li><a>@Html.ActionLink("球队管理","Team","Manager")</a></li>
+                <li><a>@Html.ActionLink("球员管理","Player","Manager")</a></li>
+                <li><a>@Html.ActionLink("杯赛管理","Cup","Manager")</a></li>
+                <li><a>@Html.ActionLink("联赛管理","League","Manager")</a></li>
+                <li><a>@Html.ActionLink("赛程管理","Match","Manager")</a></li>
+                <li><a>@Html.ActionLink("用户管理","User","Manager")</a></li>
+                <li><a>@Html.ActionLink("评论管理","Comment","Manager")</a></li>
+                <li><a>@Html.ActionLink("文章管理","Article","Manager")</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+
+@RenderBody()
+

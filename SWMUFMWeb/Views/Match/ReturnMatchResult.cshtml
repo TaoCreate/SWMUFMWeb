@@ -1,0 +1,68 @@
+﻿@model SWMUFMWeb.Views.ViewModel.LayoutOfUser
+@{
+	Layout = "_UserPageLayout";
+}
+
+<body>
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="hs-text">
+						<h2><br /></h2>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item set-bg" data-setbg="/img/bisai2.jpg"></div>
+		</div>
+	</section>
+
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>赛程结果</h4>
+				<div style="margin-top:20px">
+					<h6>比赛结果：@ViewBag.winTeam</h6>
+					<br>
+					<h6>@ViewBag.team1 --- @ViewBag.team1Goal : @ViewBag.team1Goa2 --- @ViewBag.team2</h6>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>评论</h4>
+				<div style="margin-top:20px">
+					@foreach(var item in Model.commentAndNickname)
+					{
+						<h6>@item.Comment.CommentContent</h6>
+						<p>@item.Nickname---@item.Comment.CommentDate</p>
+						<br>
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section style="margin-top: 50px;margin-left: 100px;margin-right: 100px;margin-bottom: 50px;">
+		<div style="display:flex">
+			<div class="sb-widget" style="width:900px">
+				<h4>发表评论</h4>
+				<div style="margin-top:20px">
+					<form asp-action="InsertComment">
+						<label>评论</label>
+						<br />
+						<textarea name="commentContent" type="text" cols="90"></textarea>
+						<br />
+						<button  name="matchId" value=@ViewBag.matchId class="">发表</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

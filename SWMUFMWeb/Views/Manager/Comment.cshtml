@@ -1,0 +1,38 @@
+﻿@model List<SWMUFMWeb.Models.Comment>
+@{
+    Layout = "_ManagerLayout";
+}
+<h1>评论管理界面</h1>
+<hr />
+<h2>评论列表</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>评论Id</th>
+            <th style="word-wrap:break-word;word-break:break-all;width:200px">评论内容</th>
+            <th>评论人Id</th>
+            <th>评论时间</th>
+            <th>评论赛程Id</th>
+            <th>评论文章Id</th>
+            <th>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CommentId</td>
+                <td>@item.CommentContent</td>
+                <td>@item.UserId</td>
+                <td>@item.CommentDate</td>
+                <td>@item.MatchId</td>
+                <td>@item.ArticleId</td>
+                <td>@Html.ActionLink("删除","DeleteComment",new{commentId=item.CommentId})</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
